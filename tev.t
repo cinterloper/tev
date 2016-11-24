@@ -1,16 +1,27 @@
+_G.error_message = nil
+local JSON = (loadfile "ext/JSON.lua")() -- one-time load of the routines
 
-_G.io_loop_instance = nil
-_G.rc = nil
-_G.r = nil
-_G.TURBO_STATIC_MAX = nil
-_G.TURBO_SOCKET_BUFFER_SZ = nil
-_G.SIGCHLD = nil
-_G.SIGIO = nil
-_G.__TURBO_USE_LUASOCKET__ = false
-_G.TURBO_SSL = false
-local turbo = require "turbo"
+function readAll(file)
+    local f = io.open(file, "rb")
+    local content = f:read("*all")
+    f:close()
+    return content
+end
 
-terralib.includepath = terralib.includepath..";./TCP-eventbus-client-C/include/;/opt/terra-Linux-x86_64-332a506/include/"
+function keySet(tbl)
+  local keyset ={}
+  local n = 0
+  for k,v in pairs(tbl) do
+    n=n+1
+    keyset[n]=k
+  end
+  return keyset
+end
+
+f = readAll("example.json")
+d = JSON:decode(f)
+
+terralib.includepath = terralib.includepath..";./ext/TCP-eventbus-client-C/include/;/opt/terra-Linux-x86_64-332a506/include/"
 
 local C = terralib.includecstring([[
 #include "vertx.h"
@@ -19,7 +30,12 @@ local C = terralib.includecstring([[
 ]])
 
 
+methods = {}
+for key,value in pairs(d) do
+  methods[key] = terra(env : &int8, [params])
+    var [ENV] = jvm.Env{env}
+    return declare.unwrap(f(wrapped))
+  end
 
-for key,value in pairs(C) do
   print(key)
 end
