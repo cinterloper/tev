@@ -1,0 +1,33 @@
+{
+  "get": [
+    "io.vertx.core.json.JsonObject",
+    "io.vertx.core.Handler"
+  ],
+  "delete": [
+    "io.vertx.core.json.JsonObject",
+    "io.vertx.core.Handler"
+  ],
+  "create": [
+    "io.vertx.core.Vertx"
+  ],
+  "set": [
+    "io.vertx.core.json.JsonObject",
+    "io.vertx.core.Handler"
+  ],
+  "getSize": [
+    "io.vertx.core.json.JsonObject",
+    "io.vertx.core.Handler"
+  ],
+  "getKeys": [
+    "io.vertx.core.json.JsonObject",
+    "io.vertx.core.Handler"
+  ],
+  "createProxy": [
+    "io.vertx.core.Vertx",
+    "java.lang.String"
+  ],
+  "submit": [
+    "io.vertx.core.json.JsonObject",
+    "io.vertx.core.Handler"
+  ]
+}
