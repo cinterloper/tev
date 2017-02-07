@@ -1,6 +1,8 @@
 _G.error_message = nil
 local JSON = (loadfile "ext/JSON.lua")() 
 
+
+
 function readAll(file)
     local f = io.open(file, "rb")
     local content = f:read("*all")
@@ -29,12 +31,20 @@ local C = terralib.includecstring([[
 
 ]])
 
+
+local init = terra()
+  C.create_eventbus()
+
+
+
 function gen_native_methods()
   local methods = {}
   for key,value in pairs(d) do
-  --methods[key] = terra(env : &int8, [params])
-  --var [ENV] = jvm.Env{env}
-  --return declare.unwrap(f(wrapped))
+    methods[key] = terra(env : &int8, [params])
+
+      return declare.unwrap(f(wrapped))
+    end
+
     print(key)
   end
 end
