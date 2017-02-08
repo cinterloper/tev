@@ -15,7 +15,7 @@ parser:option("-I --include", "Include locations."):count("*")
 
 local args = parser:parse()
 
-print_r(args)
+--print_r(args)
 
 local C = terralib.includec(args["input"])
 
@@ -24,6 +24,7 @@ local C = terralib.includec(args["input"])
 
 if args["member"] then
      try = pcall(function()
+        print_r(C[args["member"]]:gettype())
         print(JSON:encode_pretty(C[args["member"]]:gettype().parameters))
       end)
       if not try then
