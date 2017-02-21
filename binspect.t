@@ -1,7 +1,6 @@
 _G._ENV=nil
 _G.error_message = nil
-terralib.includepath = terralib.includepath..";./ext/TCP-eventbus-client-C/include/;/opt/terra-Linux-x86_64-332a506/include/"
-package.path = package.path .. ';./ext/LuLPeg/?.lua;./ext/?.lua'
+terralib.includepath = terralib.includepath..";./ext/TCP-eventbus-client-C/include/;/opt/terra-Linux-x86_64-332a506/include/"package.path = package.path .. ';./ext/LuLPeg/?.lua;./ext/?.lua'
 local JSON = (loadfile "ext/JSON.lua")() -- one-time load of the routines
 local jp = require "jsonpath"
 require "tbase"
@@ -15,6 +14,7 @@ parser:option("-d --dump", "dump member named ")
 parser:option("-I --include", "Include locations."):count("*")
 
 local args = parser:parse()
+
 
 --print_r(args)
 
